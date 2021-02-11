@@ -1,0 +1,34 @@
+{% extends 'resizer/base.html' %}
+{% block title %} image detail {% endblock title %}
+{% block content %}
+  <div>
+    <a href="{% url 'picture_list' %}">Назад к списку</a>
+    <div>
+      <h2>{{ picture.image_file }}</h2>
+    </div>
+    <div>
+      <form action="{% url 'picture_detail' picture.id %}" method="post">
+        {% csrf_token %}
+        <div>
+          {{ form.errors }}
+        </div>
+        <div>
+          <label for="width">Ширина </label><br>
+          <input id="width" type="text" name="width" value="">
+        </div>
+        <br>
+        <div>
+          <label for="height">Высота </label><br>
+          <input id="height" type="text" name="height" value="">
+        </div>
+        <br>
+        <input type="submit" value="Отправить">
+      </form>
+      <br>
+      <div>
+        <img src="{{ picture.image_file.url }}" alt="">
+        <img src="{{ picture.name }}" alt="">
+      </div>
+    </div>
+  </div>
+{% endblock content %}
